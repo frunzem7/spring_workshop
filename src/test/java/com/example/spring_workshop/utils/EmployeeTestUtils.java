@@ -22,13 +22,13 @@ public class EmployeeTestUtils {
             .name(NAME_ONE)
             .password(PASSWORD_ONE)
             .stream(STREAM_ONE)
-            .careerCoach(EMPLOYEE_TWO)
+//            .careerCoach(EMPLOYEE_TWO)
             .build();
     public static final EmployeeDTO EMPLOYEE_DTO_ONE = EmployeeDTO.builder()
             .email(EMAIL_ONE)
             .name(NAME_ONE)
             .password(PASSWORD_ONE)
-            .careerCoachEmail(EMPLOYEE_ONE.getCareerCoach().getEmail())
+//            .careerCoachEmail(EMPLOYEE_ONE.getCareerCoach().getEmail())
             .streamName(STREAM_ONE.getName())
             .build();
 }

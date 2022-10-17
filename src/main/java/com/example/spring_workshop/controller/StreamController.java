@@ -27,4 +27,9 @@ public class StreamController {
     public List<String> getStreamNamesByDepartment(@PathVariable String department) {
         return streamService.getStreamNamesByDepartment(department);
     }
+
+    @PostMapping
+    public StreamDTO createStream(@RequestBody StreamDTO streamDTO){
+        return streamService.createStream(streamDTO);
+    }
 }

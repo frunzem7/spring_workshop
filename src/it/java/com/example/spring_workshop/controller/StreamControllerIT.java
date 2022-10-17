@@ -1,5 +1,5 @@
 package com.example.spring_workshop.controller;
 
-public class EmployeeControllerIT {
+public class StreamControllerIT {
 
 }

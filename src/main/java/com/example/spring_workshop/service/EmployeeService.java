@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public List<EmployeeDTO> getEmployeeByDepartment(String department) {
         return employeeRepository.getAllByStreamDepartment(department)
                 .stream()
@@ -30,15 +32,22 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    public void delete(String email) {
-        employeeRepository.deleteById(email);
+    @Transactional
+    public String deleteEmployeeById(Long employeeId) {
+        try {
+            employeeRepository.deleteById(employeeId);
+        } catch (Exception e){
+            throw new IllegalArgumentException("Employee with UUID = " + employeeId + " not found");
+        }
+        return "Employee with UUID = " + employeeId + " was deleted successfully";
     }
 
-    public EmployeeDTO createUser(EmployeeDTO employeeDTO) {
+    @Transactional
+    public String createEmployee(EmployeeDTO employeeDTO) {
         Employee employee = employeeDTO.toEmployee(employeeDTO);
         Stream stream = streamService.getStreamById(employeeDTO.getStreamId());
         employee.setStream(stream);
-        employee.setCareerCoach(stream.getMentor());
-        return EmployeeDTO.employeeToEmployeeToDTO(employeeRepository.save(employeeDTO.toEmployee(employeeDTO)));
+
+        return employeeRepository.save(employee).getUuid();
     }
 }

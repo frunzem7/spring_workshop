@@ -9,14 +9,26 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+import static com.example.spring_workshop.entites.dto.StreamDTO.toStreamDto;
+import static com.example.spring_workshop.entites.dto.StreamDTO.toStreamEntity;
+
 @Service
 @RequiredArgsConstructor
 public class StreamService {
     private final StreamRepository streamRepository;
 
+    @Transactional
+    public StreamDTO createStream(StreamDTO streamDTO){
+        Stream stream = streamRepository.save(toStreamEntity(streamDTO));
+
+        return toStreamDto(stream);
+    }
+
+    @Transactional
     public List<StreamDTO> getAllStreams() {
         return streamRepository.findAll().stream()
-                .map(StreamDTO::toDTO)
+                .map(StreamDTO::toStreamDto)
                 .collect(Collectors.toList());
     }
 

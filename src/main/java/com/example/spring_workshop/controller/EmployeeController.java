@@ -3,6 +3,8 @@ package com.example.spring_workshop.controller;
 import com.example.spring_workshop.entites.dto.EmployeeDTO;
 import com.example.spring_workshop.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,13 +25,13 @@ public class EmployeeController {
         return employeeService.getEmployeeByDepartment(department);
     }
 
-    @DeleteMapping("/{email}")
-    public void deleteByEmail(@PathVariable String email){
-        employeeService.delete(email);
+    @DeleteMapping("/{employeeId}")
+    public ResponseEntity<String> deleteByEmail(@PathVariable Long employeeId){
+        return ResponseEntity.ok(employeeService.deleteEmployeeById(employeeId));
     }
 
     @PostMapping()
-    public EmployeeDTO createUser(@RequestBody EmployeeDTO employeeDTO){
-        return employeeService.createUser(employeeDTO);
+    public ResponseEntity<String> createUser(@RequestBody EmployeeDTO employeeDTO){
+        return  ResponseEntity.status(HttpStatus.CREATED).body(employeeService.createEmployee(employeeDTO));
     }
 }

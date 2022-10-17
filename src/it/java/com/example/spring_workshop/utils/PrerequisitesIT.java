@@ -6,7 +6,7 @@ import com.example.spring_workshop.repository.EmployeeRepository;
 import com.example.spring_workshop.repository.StreamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 import javax.transaction.Transactional;
 
 @Service
@@ -32,9 +32,7 @@ public class PrerequisitesIT {
     }
 
     @Transactional
-    public void addStreamToEmployee(Long streamId,String email ){
-//        var stream= streamRepository.getStreamById(streamId);
-        employeeRepository.addStreamToEmployee(streamId, email);
-
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
     }
 }

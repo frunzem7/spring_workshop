@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import static com.example.spring_workshop.TestConstants.*;
-import static com.example.spring_workshop.utils.EmployeeConstantsIT.EMPLOYEE_MENTOR_1;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StreamConstantsIT {
@@ -14,6 +13,6 @@ public class StreamConstantsIT {
             .id(ID_ONE)
             .department(DEPARTMENT_ONE)
             .name(STREAM_NAME_ONE)
-            .mentor(EMPLOYEE_MENTOR_1)
+            .mentor(null)
             .build();
 }
